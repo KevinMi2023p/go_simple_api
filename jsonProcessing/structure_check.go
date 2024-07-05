@@ -30,6 +30,10 @@ func CheckJSONStructure(data map[string]interface{}) error {
 		return fmt.Errorf("missing 'total' field in JSON")
 	}
 
+	if !checkDollarStringFormat(value, false) {
+		return fmt.Errorf("dollar format expected")
+	}
+
 	return nil
 }
 
@@ -62,6 +66,10 @@ func checkItemsStructure(data map[string]interface{}) error {
 		value, ok = itemMap["price"]
 		if !ok || value == "" {
 			return fmt.Errorf("missing 'price' field in item")
+		}
+
+		if !checkDollarStringFormat(value, true) {
+			return fmt.Errorf("dollar format expected")
 		}
 	}
 
