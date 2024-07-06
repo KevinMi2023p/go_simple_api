@@ -17,7 +17,6 @@ func main() {
 	})
 
 	r.POST("/receipts/process", func(c *gin.Context) {
-		jsonProcessing.TotalCentValue = 0
 		var requestBody map[string]interface{}
 		err := c.ShouldBindJSON(&requestBody)
 		if err != nil {

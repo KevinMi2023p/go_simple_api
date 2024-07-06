@@ -1,44 +1,40 @@
 package jsonProcessing
 
 import (
-	"fmt"
 	"regexp"
-	"strconv"
 )
 
-var TotalCentValue int = 0
+var totalCentValue int = 0
 
-func checkDollarStringFormat(input interface{}, addToTotal bool) bool {
+func getDollarAmountFromString(input string) int {
+	centCount := 0
+	for i := range input {
+		if input[i] >= '0' && input[i] <= '9' {
+			number := input[i] - '0'
+			centCount = (10 * centCount) + int(number)
+		}
+	}
+	return centCount
+}
+
+func checkDollarStringFormat(input interface{}) bool {
 	_, ok := input.(string)
 	if !ok {
 		return false
 	}
 	regex := `^(-)?(\$)?\d+\.\d{2}$`
 	match, _ := regexp.MatchString(regex, input.(string))
-	if !match {
-		return false
-	}
-	numberRegex := `\$?(\d+)\.(\d{2})`
-	re := regexp.MustCompile(numberRegex)
-	numberString := re.FindStringSubmatch(input.(string))[1]
-	dollarValue, err := strconv.Atoi(numberString)
-	if err != nil {
-		return false
-	}
+	return match
+}
 
-	numberString = re.FindStringSubmatch(input.(string))[2]
-	centValue, err := strconv.Atoi(numberString)
-	if err != nil {
-		return false
-	}
+func resetCentValueCounter() {
+	totalCentValue = 0
+}
 
-	fmt.Println(dollarValue, centValue)
-	itemCentValue := (100 * dollarValue) + centValue
+func addCentValueToTotal(input int) {
+	totalCentValue += input
+}
 
-	if addToTotal {
-		TotalCentValue += itemCentValue
-		return true
-	}
-
-	return TotalCentValue == itemCentValue
+func getTotalCentValue() int {
+	return totalCentValue
 }
