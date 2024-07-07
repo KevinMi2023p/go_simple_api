@@ -20,6 +20,9 @@ func CheckJSONStructure(data map[string]interface{}) error {
 	if !ok || value == "" {
 		return fmt.Errorf("missing 'purchaseDate' field in JSON")
 	}
+	if !checkValidDateFormat(value.(string)) {
+		return fmt.Errorf("invalid date format")
+	}
 	scoreSystem.ScoreDate(value.(string))
 
 	value, ok = data["purchaseTime"]
@@ -33,7 +36,6 @@ func CheckJSONStructure(data map[string]interface{}) error {
 	scoreSystem.ScorePurchaseTime(timeIntegerRepresentation)
 
 	amountValidation.ResetCentValueCounter()
-
 	err := checkItemsStructure(data)
 	if err != nil {
 		return fmt.Errorf("missing 'items' field in JSON")

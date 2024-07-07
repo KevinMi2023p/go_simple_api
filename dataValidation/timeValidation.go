@@ -2,6 +2,7 @@ package dataValidation
 
 import (
 	"regexp"
+	"time"
 )
 
 func checkValidTimeFormat(time string) int {
@@ -30,4 +31,9 @@ func checkValidTimeFormat(time string) int {
 	}
 
 	return timeIntRepresentation
+}
+
+func checkValidDateFormat(date string) bool {
+	_, err := time.Parse("2006-01-02", date)
+	return err == nil
 }
