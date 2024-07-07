@@ -2,6 +2,8 @@ package jsonProcessing
 
 import (
 	"fmt"
+
+	"github.com/KevinMi2023p/go_simple_api/jsonProcessing/amountValidation"
 )
 
 func CheckJSONStructure(data map[string]interface{}) error {
@@ -25,7 +27,7 @@ func CheckJSONStructure(data map[string]interface{}) error {
 	}
 	scorePurchaseTime(value.(string))
 
-	resetCentValueCounter()
+	amountValidation.ResetCentValueCounter()
 
 	err := checkItemsStructure(data)
 	if err != nil {
@@ -37,12 +39,12 @@ func CheckJSONStructure(data map[string]interface{}) error {
 		return fmt.Errorf("missing 'total' field in JSON")
 	}
 
-	if !checkDollarStringFormat(value) {
+	if !amountValidation.CheckDollarStringFormat(value) {
 		return fmt.Errorf("dollar format expected")
 	}
 
-	totalReceitValue := getDollarAmountFromString(value.(string))
-	if totalReceitValue != getTotalCentValue() {
+	totalReceitValue := amountValidation.GetDollarAmountFromString(value.(string))
+	if totalReceitValue != amountValidation.GetTotalCentValue() {
 		return fmt.Errorf("prices of items don't match total")
 	}
 
@@ -69,7 +71,7 @@ func checkItemsStructure(data map[string]interface{}) error {
 	}
 	scoreNumberOfItems(numberOfItems)
 
-	resetCentValueCounter()
+	amountValidation.ResetCentValueCounter()
 
 	for _, item := range items {
 		itemMap, ok := item.(map[string]interface{})
@@ -89,14 +91,14 @@ func checkItemsStructure(data map[string]interface{}) error {
 		}
 		price := value
 
-		scoreItemDescription(description.(string), getDollarAmountFromString(price.(string)))
+		scoreItemDescription(description.(string), amountValidation.GetDollarAmountFromString(price.(string)))
 
-		if !checkDollarStringFormat(value) {
+		if !amountValidation.CheckDollarStringFormat(value) {
 			return fmt.Errorf("dollar format expected")
 		}
 
-		itemCentValue := getDollarAmountFromString(value.(string))
-		addCentValueToTotal(itemCentValue)
+		itemCentValue := amountValidation.GetDollarAmountFromString(value.(string))
+		amountValidation.AddCentValueToTotal(itemCentValue)
 	}
 
 	return nil

@@ -1,4 +1,4 @@
-package jsonProcessing
+package amountValidation
 
 import (
 	"regexp"
@@ -6,7 +6,7 @@ import (
 
 var totalCentValue int = 0
 
-func getDollarAmountFromString(input string) int {
+func GetDollarAmountFromString(input string) int {
 	centCount := 0
 	for i := range input {
 		if input[i] >= '0' && input[i] <= '9' {
@@ -17,7 +17,7 @@ func getDollarAmountFromString(input string) int {
 	return centCount
 }
 
-func checkDollarStringFormat(input interface{}) bool {
+func CheckDollarStringFormat(input interface{}) bool {
 	_, ok := input.(string)
 	if !ok {
 		return false
@@ -27,14 +27,14 @@ func checkDollarStringFormat(input interface{}) bool {
 	return match
 }
 
-func resetCentValueCounter() {
+func ResetCentValueCounter() {
 	totalCentValue = 0
 }
 
-func addCentValueToTotal(input int) {
+func AddCentValueToTotal(input int) {
 	totalCentValue += input
 }
 
-func getTotalCentValue() int {
+func GetTotalCentValue() int {
 	return totalCentValue
 }
