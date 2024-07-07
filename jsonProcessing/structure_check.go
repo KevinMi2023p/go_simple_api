@@ -5,20 +5,25 @@ import (
 )
 
 func CheckJSONStructure(data map[string]interface{}) error {
+	resetScore()
+
 	value, ok := data["retailer"]
 	if !ok || value == "" {
 		return fmt.Errorf("missing 'retailer' field in JSON")
 	}
+	scoreRetailer(value.(string))
 
 	value, ok = data["purchaseDate"]
 	if !ok || value == "" {
 		return fmt.Errorf("missing 'purchaseDate' field in JSON")
 	}
+	scoreDate(value.(string))
 
 	value, ok = data["purchaseTime"]
 	if !ok || value == "" {
 		return fmt.Errorf("missing 'purchaseTime' field in JSON")
 	}
+	scorePurchaseTime(value.(string))
 
 	resetCentValueCounter()
 
@@ -41,6 +46,11 @@ func CheckJSONStructure(data map[string]interface{}) error {
 		return fmt.Errorf("prices of items don't match total")
 	}
 
+	scoreRoundDollar(totalReceitValue)
+	scoreQuarterDollar(totalReceitValue)
+
+	fmt.Println(getScore())
+
 	return nil
 }
 
@@ -55,9 +65,11 @@ func checkItemsStructure(data map[string]interface{}) error {
 		return fmt.Errorf("'items' field is not a list in JSON")
 	}
 
-	if len(items) == 0 {
+	numberOfItems := len(items)
+	if numberOfItems == 0 {
 		return fmt.Errorf("'items' field is empty")
 	}
+	scoreNumberOfItems(numberOfItems)
 
 	resetCentValueCounter()
 
@@ -71,11 +83,15 @@ func checkItemsStructure(data map[string]interface{}) error {
 		if !ok || value == "" {
 			return fmt.Errorf("missing 'shortDescription' field in item")
 		}
+		description := value
 
 		value, ok = itemMap["price"]
 		if !ok || value == "" {
 			return fmt.Errorf("missing 'price' field in item")
 		}
+		price := value
+
+		scoreItemDescription(description.(string), getDollarAmountFromString(price.(string)))
 
 		if !checkDollarStringFormat(value) {
 			return fmt.Errorf("dollar format expected")
