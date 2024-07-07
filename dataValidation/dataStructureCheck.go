@@ -26,7 +26,11 @@ func CheckJSONStructure(data map[string]interface{}) error {
 	if !ok || value == "" {
 		return fmt.Errorf("missing 'purchaseTime' field in JSON")
 	}
-	scoreSystem.ScorePurchaseTime(value.(string))
+	timeIntegerRepresentation := checkValidTimeFormat(value.(string))
+	if timeIntegerRepresentation == -1 {
+		return fmt.Errorf("purchase time format incorrect")
+	}
+	scoreSystem.ScorePurchaseTime(timeIntegerRepresentation)
 
 	amountValidation.ResetCentValueCounter()
 

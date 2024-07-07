@@ -72,16 +72,8 @@ func ScoreDate(date string) {
 	}
 }
 
-func ScorePurchaseTime(time string) {
-	intTimeRepresentation := 0
-	for _, char := range time {
-		if char == ':' {
-			continue
-		}
-		intTimeRepresentation *= 10
-		intTimeRepresentation += int(char - '0')
-	}
-	if 1400 < intTimeRepresentation && intTimeRepresentation < 1600 {
+func ScorePurchaseTime(time int) {
+	if 1400 < time && time < 1600 {
 		totalScore += 10
 	}
 }
