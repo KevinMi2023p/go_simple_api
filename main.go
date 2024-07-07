@@ -3,9 +3,9 @@ package main
 import (
 	"net/http"
 
+	"github.com/KevinMi2023p/go_simple_api/dataValidation"
+	"github.com/KevinMi2023p/go_simple_api/dataValidation/scoreSystem"
 	"github.com/KevinMi2023p/go_simple_api/generateID"
-	"github.com/KevinMi2023p/go_simple_api/jsonProcessing"
-	"github.com/KevinMi2023p/go_simple_api/jsonProcessing/scoreSystem"
 	"github.com/gin-gonic/gin"
 )
 
@@ -21,15 +21,16 @@ func main() {
 
 	router.POST("/receipts/process", func(c *gin.Context) {
 		var requestBody map[string]interface{}
+		badRequstMessage := "The receipt is invalid"
 		err := c.ShouldBindJSON(&requestBody)
 		if err != nil {
-			c.String(http.StatusBadRequest, "The receipt is invalid")
+			c.String(http.StatusBadRequest, badRequstMessage)
 			return
 		}
 
-		err = jsonProcessing.CheckJSONStructure(requestBody)
+		err = dataValidation.CheckJSONStructure(requestBody)
 		if err != nil {
-			c.String(http.StatusBadRequest, "The receipt is invalid")
+			c.String(http.StatusBadRequest, badRequstMessage)
 			return
 		}
 

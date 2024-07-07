@@ -1,10 +1,10 @@
-package jsonProcessing
+package dataValidation
 
 import (
 	"fmt"
 
-	"github.com/KevinMi2023p/go_simple_api/jsonProcessing/amountValidation"
-	"github.com/KevinMi2023p/go_simple_api/jsonProcessing/scoreSystem"
+	"github.com/KevinMi2023p/go_simple_api/dataValidation/amountValidation"
+	"github.com/KevinMi2023p/go_simple_api/dataValidation/scoreSystem"
 )
 
 func CheckJSONStructure(data map[string]interface{}) error {
