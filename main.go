@@ -7,6 +7,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+var mockDatabase = make(map[string]int)
+
 func main() {
 	// Your code here
 	r := gin.Default()
@@ -31,7 +33,14 @@ func main() {
 			return
 		}
 
-		c.JSON(http.StatusOK, requestBody)
+		generatedID := jsonProcessing.HashReciet(requestBody)
+		mockDatabase[generatedID] = jsonProcessing.GetScore()
+
+		output := map[string]interface{}{
+			"id": generatedID,
+		}
+
+		c.JSON(http.StatusOK, output)
 	})
 
 	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")

@@ -49,8 +49,6 @@ func CheckJSONStructure(data map[string]interface{}) error {
 	scoreRoundDollar(totalReceitValue)
 	scoreQuarterDollar(totalReceitValue)
 
-	fmt.Println(getScore())
-
 	return nil
 }
 

@@ -90,6 +90,6 @@ func resetScore() {
 	totalScore = 0
 }
 
-func getScore() int {
+func GetScore() int {
 	return totalScore
 }
