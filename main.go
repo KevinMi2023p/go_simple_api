@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 
+	"github.com/KevinMi2023p/go_simple_api/generateID"
 	"github.com/KevinMi2023p/go_simple_api/jsonProcessing"
 	"github.com/gin-gonic/gin"
 )
@@ -33,7 +34,7 @@ func main() {
 			return
 		}
 
-		generatedID := jsonProcessing.HashReciet(requestBody)
+		generatedID := generateID.HashReciet(requestBody)
 		mockDatabase[generatedID] = jsonProcessing.GetScore()
 
 		output := map[string]interface{}{

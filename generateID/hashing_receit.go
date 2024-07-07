@@ -1,4 +1,4 @@
-package jsonProcessing
+package generateID
 
 import (
 	"crypto/sha256"
