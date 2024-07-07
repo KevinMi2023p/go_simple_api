@@ -5,13 +5,13 @@ import (
 
 	"github.com/KevinMi2023p/go_simple_api/generateID"
 	"github.com/KevinMi2023p/go_simple_api/jsonProcessing"
+	"github.com/KevinMi2023p/go_simple_api/jsonProcessing/scoreSystem"
 	"github.com/gin-gonic/gin"
 )
 
 var mockDatabase = make(map[string]int)
 
 func main() {
-	// Your code here
 	router := gin.Default()
 	router.GET("/ping", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
@@ -23,7 +23,6 @@ func main() {
 		var requestBody map[string]interface{}
 		err := c.ShouldBindJSON(&requestBody)
 		if err != nil {
-			//c.(http.StatusBadRequest, The receipt is invalid)
 			c.String(http.StatusBadRequest, "The receipt is invalid")
 			return
 		}
@@ -35,7 +34,7 @@ func main() {
 		}
 
 		generatedID := generateID.HashReciet(requestBody)
-		mockDatabase[generatedID] = jsonProcessing.GetScore()
+		mockDatabase[generatedID] = scoreSystem.GetScore()
 
 		output := map[string]interface{}{
 			"id": generatedID,

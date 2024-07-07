@@ -4,28 +4,29 @@ import (
 	"fmt"
 
 	"github.com/KevinMi2023p/go_simple_api/jsonProcessing/amountValidation"
+	"github.com/KevinMi2023p/go_simple_api/jsonProcessing/scoreSystem"
 )
 
 func CheckJSONStructure(data map[string]interface{}) error {
-	resetScore()
+	scoreSystem.ResetScore()
 
 	value, ok := data["retailer"]
 	if !ok || value == "" {
 		return fmt.Errorf("missing 'retailer' field in JSON")
 	}
-	scoreRetailer(value.(string))
+	scoreSystem.ScoreRetailer(value.(string))
 
 	value, ok = data["purchaseDate"]
 	if !ok || value == "" {
 		return fmt.Errorf("missing 'purchaseDate' field in JSON")
 	}
-	scoreDate(value.(string))
+	scoreSystem.ScoreDate(value.(string))
 
 	value, ok = data["purchaseTime"]
 	if !ok || value == "" {
 		return fmt.Errorf("missing 'purchaseTime' field in JSON")
 	}
-	scorePurchaseTime(value.(string))
+	scoreSystem.ScorePurchaseTime(value.(string))
 
 	amountValidation.ResetCentValueCounter()
 
@@ -48,8 +49,8 @@ func CheckJSONStructure(data map[string]interface{}) error {
 		return fmt.Errorf("prices of items don't match total")
 	}
 
-	scoreRoundDollar(totalReceitValue)
-	scoreQuarterDollar(totalReceitValue)
+	scoreSystem.ScoreRoundDollar(totalReceitValue)
+	scoreSystem.ScoreQuarterDollar(totalReceitValue)
 
 	return nil
 }
@@ -69,7 +70,7 @@ func checkItemsStructure(data map[string]interface{}) error {
 	if numberOfItems == 0 {
 		return fmt.Errorf("'items' field is empty")
 	}
-	scoreNumberOfItems(numberOfItems)
+	scoreSystem.ScoreNumberOfItems(numberOfItems)
 
 	amountValidation.ResetCentValueCounter()
 
@@ -91,7 +92,7 @@ func checkItemsStructure(data map[string]interface{}) error {
 		}
 		price := value
 
-		scoreItemDescription(description.(string), amountValidation.GetDollarAmountFromString(price.(string)))
+		scoreSystem.ScoreItemDescription(description.(string), amountValidation.GetDollarAmountFromString(price.(string)))
 
 		if !amountValidation.CheckDollarStringFormat(value) {
 			return fmt.Errorf("dollar format expected")
