@@ -1,3 +1,4 @@
+// HashReciet takes a map of string to interface{} and returns the SHA256 hash of the JSON representation of the map.
 package generateID
 
 import (
