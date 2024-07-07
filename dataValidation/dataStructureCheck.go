@@ -1,3 +1,7 @@
+// CheckJSONStructure validates the structure of a JSON object and performs data validation.
+// It checks for the presence of required fields, validates date and time formats,
+// checks the structure of items, and verifies the total amount.
+// If any validation fails, it returns an error.
 package dataValidation
 
 import (

@@ -1,3 +1,7 @@
+// checkItemsStructure validates the structure and fields of the 'items' in the given JSON data.
+// It checks if the 'items' field is present, if it is a list, and if each item has the required fields.
+// It also calculates the score based on the number of items and the description of each item.
+// Finally, it performs dollar amount validation and calculates the total dollar amount.
 package dataValidation
 
 import (
