@@ -9,11 +9,14 @@ import (
 // Assumes correct dollar format
 func GetDollarAmountFromString(input string) int {
 	centCount := 0
+	multiplier := 1
 	for _, char := range input {
 		if unicode.IsDigit(char) {
 			number := char - '0'
 			centCount = (10 * centCount) + int(number)
+		} else if char == '-' {
+			multiplier = -1
 		}
 	}
-	return centCount
+	return centCount * multiplier
 }
