@@ -1,7 +1,5 @@
 package scoreSystem
 
-var totalScore int = 0
-
 // ScoreRoundDollar calculates the score based on the cent price.
 // If the cent price is divisible by 100, it adds 50 to the total score.
 func ScoreRoundDollar(centPrice int) {
@@ -22,14 +20,4 @@ func ScoreQuarterDollar(centPrice int) {
 // It adds half of the item count multiplied by 5 to the total score.
 func ScoreNumberOfItems(itemCount int) {
 	totalScore += (itemCount / 2) * 5
-}
-
-// ResetScore resets the total score to 0.
-func ResetScore() {
-	totalScore = 0
-}
-
-// GetScore returns the current total score.
-func GetScore() int {
-	return totalScore
 }
