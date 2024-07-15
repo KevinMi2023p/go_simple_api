@@ -3,7 +3,6 @@ package scoreSystem
 import "testing"
 
 func TestScoreDate(t *testing.T) {
-	// Test case 1: Last character is an odd number
 	testCases := []struct {
 		input    string
 		expected int
@@ -24,7 +23,6 @@ func TestScoreDate(t *testing.T) {
 }
 
 func TestScorePurchaseTime(t *testing.T) {
-	// Test case 1: Time is between 1400 and 1600
 	testCases := []struct {
 		input    int
 		expected int
