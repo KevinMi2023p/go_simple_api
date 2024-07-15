@@ -29,7 +29,7 @@ func CheckValidTimeFormat(time string) int {
 		return -1
 	}
 
-	if timeIntRepresentation < 0 || timeIntRepresentation > 2400 {
+	if timeIntRepresentation < 0 || timeIntRepresentation >= 2400 {
 		return -1
 	}
 
