@@ -1,4 +1,4 @@
-package dataValidation
+package timeChecking
 
 import (
 	"regexp"
@@ -8,7 +8,7 @@ import (
 // checkValidTimeFormat checks if the given time string is in a valid format.
 // It returns the time representation as an integer if the format is valid,
 // otherwise it returns -1.
-func checkValidTimeFormat(time string) int {
+func CheckValidTimeFormat(time string) int {
 	timeRegex := regexp.MustCompile(`^(\d{1,2}):(\d{2})$`)
 	match := timeRegex.MatchString(time)
 	if !match {
@@ -38,7 +38,7 @@ func checkValidTimeFormat(time string) int {
 
 // checkValidDateFormat checks if the given date string is in a valid format.
 // It returns true if the format is valid, otherwise it returns false.
-func checkValidDateFormat(date string) bool {
+func CheckValidDateFormat(date string) bool {
 	_, err := time.Parse("2006-01-02", date)
 	return err == nil
 }

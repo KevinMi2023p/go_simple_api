@@ -9,6 +9,7 @@ import (
 
 	"github.com/KevinMi2023p/go_simple_api/dataValidation/amountValidation"
 	"github.com/KevinMi2023p/go_simple_api/dataValidation/scoreSystem"
+	"github.com/KevinMi2023p/go_simple_api/dataValidation/timeChecking"
 )
 
 func CheckJSONStructure(data map[string]interface{}) error {
@@ -24,7 +25,7 @@ func CheckJSONStructure(data map[string]interface{}) error {
 	if !ok || value == "" {
 		return fmt.Errorf("missing 'purchaseDate' field in JSON")
 	}
-	if !checkValidDateFormat(value.(string)) {
+	if !timeChecking.CheckValidDateFormat(value.(string)) {
 		return fmt.Errorf("invalid date format")
 	}
 	scoreSystem.ScoreDate(value.(string))
@@ -33,7 +34,7 @@ func CheckJSONStructure(data map[string]interface{}) error {
 	if !ok || value == "" {
 		return fmt.Errorf("missing 'purchaseTime' field in JSON")
 	}
-	timeIntegerRepresentation := checkValidTimeFormat(value.(string))
+	timeIntegerRepresentation := timeChecking.CheckValidTimeFormat(value.(string))
 	if timeIntegerRepresentation == -1 {
 		return fmt.Errorf("purchase time format incorrect")
 	}
