@@ -1,6 +1,10 @@
-package scoreSystem
+package scoreSystem_test
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/KevinMi2023p/go_simple_api/dataValidation/scoreSystem"
+)
 
 func TestScoreRetailer(t *testing.T) {
 	cases := []struct {
@@ -19,10 +23,10 @@ func TestScoreRetailer(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		ResetScore()
-		ScoreRetailer(c.merchantName)
-		if GetScore() != c.expectedScore {
-			t.Errorf("ScoreRetailer(%s) = %d, expected %d", c.merchantName, GetScore(), c.expectedScore)
+		scoreSystem.ResetScore()
+		scoreSystem.ScoreRetailer(c.merchantName)
+		if scoreSystem.GetScore() != c.expectedScore {
+			t.Errorf("ScoreRetailer(%s) = %d, expected %d", c.merchantName, scoreSystem.GetScore(), c.expectedScore)
 		}
 	}
 }

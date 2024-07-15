@@ -1,6 +1,10 @@
-package scoreSystem
+package scoreSystem_test
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/KevinMi2023p/go_simple_api/dataValidation/scoreSystem"
+)
 
 func TestScoreDate(t *testing.T) {
 	testCases := []struct {
@@ -14,10 +18,10 @@ func TestScoreDate(t *testing.T) {
 	}
 
 	for _, tc := range testCases {
-		ResetScore()
-		ScoreDate(tc.input)
-		if GetScore() != tc.expected {
-			t.Errorf("Expected score to be %d, but got %d", tc.expected, GetScore())
+		scoreSystem.ResetScore()
+		scoreSystem.ScoreDate(tc.input)
+		if scoreSystem.GetScore() != tc.expected {
+			t.Errorf("Expected score to be %d, but got %d", tc.expected, scoreSystem.GetScore())
 		}
 	}
 }
@@ -37,10 +41,10 @@ func TestScorePurchaseTime(t *testing.T) {
 	}
 
 	for _, tc := range testCases {
-		ResetScore()
-		ScorePurchaseTime(tc.input)
-		if GetScore() != tc.expected {
-			t.Errorf("Expected score to be %d, but got %d", tc.expected, GetScore())
+		scoreSystem.ResetScore()
+		scoreSystem.ScorePurchaseTime(tc.input)
+		if scoreSystem.GetScore() != tc.expected {
+			t.Errorf("Expected score to be %d, but got %d", tc.expected, scoreSystem.GetScore())
 		}
 	}
 }

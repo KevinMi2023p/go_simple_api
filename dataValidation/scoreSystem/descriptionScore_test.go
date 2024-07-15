@@ -1,7 +1,9 @@
-package scoreSystem
+package scoreSystem_test
 
 import (
 	"testing"
+
+	"github.com/KevinMi2023p/go_simple_api/dataValidation/scoreSystem"
 )
 
 func TestScoreItemDescription(t *testing.T) {
@@ -19,10 +21,10 @@ func TestScoreItemDescription(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		ResetScore()
-		ScoreItemDescription(test.description, test.price)
-		if GetScore() != test.expected {
-			t.Errorf("ScoreItemDescription(%s, %d) = %d, expected %d", test.description, test.price, GetScore(), test.expected)
+		scoreSystem.ResetScore()
+		scoreSystem.ScoreItemDescription(test.description, test.price)
+		if scoreSystem.GetScore() != test.expected {
+			t.Errorf("ScoreItemDescription(%s, %d) = %d, expected %d", test.description, test.price, scoreSystem.GetScore(), test.expected)
 		}
 	}
 }

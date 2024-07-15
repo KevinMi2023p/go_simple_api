@@ -1,7 +1,9 @@
-package amountValidation
+package amountValidation_test
 
 import (
 	"testing"
+
+	"github.com/KevinMi2023p/go_simple_api/dataValidation/amountValidation"
 )
 
 func TestCheckDollarStringFormat(t *testing.T) {
@@ -27,7 +29,7 @@ func TestCheckDollarStringFormat(t *testing.T) {
 	}
 
 	for _, tc := range testCases {
-		if result := CheckDollarStringFormat(tc.input); result != tc.expected {
+		if result := amountValidation.CheckDollarStringFormat(tc.input); result != tc.expected {
 			t.Errorf("CheckDollarStringFormat(%s) = %t, expected %t", tc.input, result, tc.expected)
 		}
 	}

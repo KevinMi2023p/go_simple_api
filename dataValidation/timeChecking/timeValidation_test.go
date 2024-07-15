@@ -1,7 +1,9 @@
-package timeChecking
+package timeChecking_test
 
 import (
 	"testing"
+
+	"github.com/KevinMi2023p/go_simple_api/dataValidation/timeChecking"
 )
 
 func TestCheckValidTimeFormat(t *testing.T) {
@@ -30,7 +32,7 @@ func TestCheckValidTimeFormat(t *testing.T) {
 	}
 
 	for _, tf := range timeFormats {
-		if result := CheckValidTimeFormat(tf.timeString); result != tf.expectedTime {
+		if result := timeChecking.CheckValidTimeFormat(tf.timeString); result != tf.expectedTime {
 			t.Errorf("CheckValidTimeFormat(%s) = %d; want %d", tf.timeString, result, tf.expectedTime)
 		}
 	}
@@ -58,7 +60,7 @@ func TestCheckValidDateFormat(t *testing.T) {
 	}
 
 	for _, df := range dateFormats {
-		if result := CheckValidDateFormat(df.dateString); result != df.expectedDate {
+		if result := timeChecking.CheckValidDateFormat(df.dateString); result != df.expectedDate {
 			t.Errorf("CheckValidDateFormat(%s) = %t; want %t", df.dateString, result, df.expectedDate)
 		}
 	}

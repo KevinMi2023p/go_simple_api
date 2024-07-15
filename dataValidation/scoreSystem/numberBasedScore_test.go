@@ -1,7 +1,9 @@
-package scoreSystem
+package scoreSystem_test
 
 import (
 	"testing"
+
+	"github.com/KevinMi2023p/go_simple_api/dataValidation/scoreSystem"
 )
 
 func TestScoreRoundDollar(t *testing.T) {
@@ -18,10 +20,10 @@ func TestScoreRoundDollar(t *testing.T) {
 	}
 
 	for _, test := range testCases {
-		ResetScore()
-		ScoreRoundDollar(test.centPrice)
-		if GetScore() != test.expected {
-			t.Errorf("ScoreRoundDollar(%d) = %d, expected %d", test.centPrice, GetScore(), test.expected)
+		scoreSystem.ResetScore()
+		scoreSystem.ScoreRoundDollar(test.centPrice)
+		if scoreSystem.GetScore() != test.expected {
+			t.Errorf("ScoreRoundDollar(%d) = %d, expected %d", test.centPrice, scoreSystem.GetScore(), test.expected)
 		}
 	}
 }
@@ -42,10 +44,10 @@ func TestScoreQuarterDollar(t *testing.T) {
 	}
 
 	for _, test := range testCases {
-		ResetScore()
-		ScoreQuarterDollar(test.centPrice)
-		if GetScore() != test.expected {
-			t.Errorf("ScoreQuarterDollar(%d) = %d, expected %d", test.centPrice, GetScore(), test.expected)
+		scoreSystem.ResetScore()
+		scoreSystem.ScoreQuarterDollar(test.centPrice)
+		if scoreSystem.GetScore() != test.expected {
+			t.Errorf("ScoreQuarterDollar(%d) = %d, expected %d", test.centPrice, scoreSystem.GetScore(), test.expected)
 		}
 	}
 }
@@ -65,10 +67,10 @@ func TestScoreNumberOfItems(t *testing.T) {
 	}
 
 	for _, test := range testCases {
-		ResetScore()
-		ScoreNumberOfItems(test.itemCount)
-		if GetScore() != test.expected {
-			t.Errorf("ScoreNumberOfItems(%d) = %d, expected %d", test.itemCount, GetScore(), test.expected)
+		scoreSystem.ResetScore()
+		scoreSystem.ScoreNumberOfItems(test.itemCount)
+		if scoreSystem.GetScore() != test.expected {
+			t.Errorf("ScoreNumberOfItems(%d) = %d, expected %d", test.itemCount, scoreSystem.GetScore(), test.expected)
 		}
 	}
 }

@@ -1,7 +1,9 @@
-package amountValidation
+package amountValidation_test
 
 import (
 	"testing"
+
+	"github.com/KevinMi2023p/go_simple_api/dataValidation/amountValidation"
 )
 
 func TestGetDollarAmountFromString(t *testing.T) {
@@ -21,7 +23,7 @@ func TestGetDollarAmountFromString(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		result := GetDollarAmountFromString(test.input)
+		result := amountValidation.GetDollarAmountFromString(test.input)
 		if result != test.expected {
 			t.Errorf("Input: %s, Expected: %d, Got: %d", test.input, test.expected, result)
 		}
