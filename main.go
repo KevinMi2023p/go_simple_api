@@ -28,14 +28,16 @@ func main() {
 			return
 		}
 
-		err = dataValidation.CheckJSONStructure(requestBody)
-		if err != nil {
-			c.String(http.StatusBadRequest, badRequstMessage)
-			return
-		}
-
 		generatedID := generateID.HashReciet(requestBody)
-		mockDatabase[generatedID] = scoreSystem.GetScore()
+
+		if _, ok := mockDatabase[generatedID]; !ok {
+			err = dataValidation.CheckJSONStructure(requestBody)
+			if err != nil {
+				c.String(http.StatusBadRequest, badRequstMessage)
+				return
+			}
+			mockDatabase[generatedID] = scoreSystem.GetScore()
+		}
 
 		output := map[string]interface{}{
 			"id": generatedID,
